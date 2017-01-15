@@ -1,2 +1,2 @@
-pub mod first;
-pub mod second;
+pub mod two_sum;
+pub mod add_two_numbers;

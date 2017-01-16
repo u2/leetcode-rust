@@ -16,6 +16,7 @@ pub fn two_sum(nums: &[usize], target: usize) -> Option<[usize; 2]> {
 
 // Approach #2 (One-pass Hash Table)
 // https://leetcode.com/articles/two-sum/
+
 use std::collections::HashMap;
 
 pub fn two_sum_approach_two(nums: &[usize], target: usize) -> Option<[usize; 2]> {

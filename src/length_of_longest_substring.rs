@@ -25,6 +25,7 @@ pub fn length_of_longest_substring(s: String) -> usize {
 
 // Optimized
 // https://leetcode.com/articles/longest-substring-without-repeating-characters/
+
 use std::collections::HashMap;
 
 pub fn approach_two(s: String) -> usize {

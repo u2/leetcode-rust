@@ -1,3 +1,6 @@
+// By using HashSet as a sliding window,
+// checking if a character in the current can be done in O(1)O(1).
+
 use std::collections::VecDeque;
 
 pub fn length_of_longest_substring(s: String) -> usize {
@@ -25,6 +28,11 @@ pub fn length_of_longest_substring(s: String) -> usize {
 
 // Optimized
 // https://leetcode.com/articles/longest-substring-without-repeating-characters/
+// The above solution requires at most 2n steps.
+// In fact, it could be optimized to require only n steps.
+// Instead of using a set to tell if a character exists or not,
+// we could define a mapping of the characters to its index.
+// Then we can skip the characters immediately when we found a repeated character.
 
 use std::collections::HashMap;
 

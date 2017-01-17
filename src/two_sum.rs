@@ -1,4 +1,7 @@
 // Approach #1 (Brute Force)
+// Loop through each element x,
+// find if there is another value that equals to target - x
+// The time Complexity is O(n*n)
 pub fn two_sum(nums: &[usize], target: usize) -> Option<[usize; 2]> {
     let len = nums.len();
     if len < 2 {
@@ -15,7 +18,15 @@ pub fn two_sum(nums: &[usize], target: usize) -> Option<[usize; 2]> {
 }
 
 // Approach #2 (One-pass Hash Table)
-// https://leetcode.com/articles/two-sum/
+// Inspired from https://leetcode.com/articles/two-sum/
+// To improve the time complexity,
+// we need a more efficient way to check if the complement exists in the array.
+// If exist we need to look up its index.
+// The best way maintain a mapping of each element to its indexs? HashMap.
+// We reduce the look up time from O(n)O(n) to O(1)O(1) by trading space for speed.
+// While we iterate and inserting elements into the table,
+// we also look back to check if current element's complement already exists in the table.
+// If it exists, we have found a solution and return immediately.
 
 use std::collections::HashMap;
 

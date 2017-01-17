@@ -13,6 +13,8 @@ pub fn longest_palindrome(input: &str) -> &str {
     return &input[0..0];
 }
 
+// TODO: optimize
+// TODO: into_bytes is not correct, because more bytes than chars.
 pub fn is_palindrome(s: String) -> bool {
     let mut rs = s.clone().into_bytes();
     rs.reverse();

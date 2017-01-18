@@ -4,14 +4,11 @@ pub fn add_two_numbers(l1: &[usize], l2: &[usize]) -> Vec<usize> {
         false => l2.len(),
     };
     let mut vec: Vec<usize> = Vec::with_capacity(length + 1);
-    let mut a: usize;
-    let mut b: usize;
-    let mut c: usize;
     let mut carry: usize = 0;
     for i in 0..length {
-        a = *l1.get(i).unwrap_or(&0);
-        b = *l2.get(i).unwrap_or(&0);
-        c = a + b + carry;
+        let a = *l1.get(i).unwrap_or(&0);
+        let b = *l2.get(i).unwrap_or(&0);
+        let mut c = a + b + carry;
         if c > 9 {
             carry = 1;
             c = c - 10;

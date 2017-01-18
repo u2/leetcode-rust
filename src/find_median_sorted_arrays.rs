@@ -8,8 +8,11 @@
 // The index i moves by bisection method.
 // The index i moves left to (m / 2 + i - n) / 2, moves right to (m / 2 + n + i) / 2.
 
-// The time complexity is O(log2(min(m,n)))
+// The time complexity is O(log_2(min(m,n)))
 // For m/2 it is always rounded down
+
+use std::cmp;
+
 pub fn find_median_sorted_arrays(num1: &[usize], num2: &[usize]) -> Option<f32> {
     let m: usize = num1.len();
     let n: usize = num2.len();
@@ -69,10 +72,8 @@ pub fn find_median_sorted_arrays(num1: &[usize], num2: &[usize]) -> Option<f32> 
                 return None;
             }
         } else if shorter[j] < longer[i] {
-            if longer[i - 1] > shorter[j] {
-                return Some(longer[i - 1] as f32);
-            } else if longer[i - 1] < shorter[j] {
-                return Some(shorter[j] as f32);
+            if longer[i - 1] != shorter[j] {
+                return Some(cmp::max(longer[i - 1], shorter[j]) as f32);
             } else {
                 return None;
             }

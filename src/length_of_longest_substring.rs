@@ -7,11 +7,10 @@ pub fn length_of_longest_substring(s: String) -> usize {
     let array = s.as_bytes();
     let mut c: VecDeque<u8> = VecDeque::with_capacity(array.len());
     let mut max: usize = 0;
-    let mut z: Option<u8>;
 
     for x in array.iter() {
         if c.contains(x) {
-            z = c.pop_front();
+            let mut z: Option<u8> = c.pop_front();
             while z != Some(*x) {
                 z = c.pop_front();
             }
@@ -102,16 +101,15 @@ mod test {
     }
 
     use test::Bencher;
+    // 96 ns/iter (+/- 26)
     #[bench]
     fn bench_length_of_longest_substring(b: &mut Bencher) {
         b.iter(|| length_of_longest_substring(String::from("hello world")));
     }
 
+    // 561 ns/iter (+/- 180)
     #[bench]
     fn bench_approach_two(b: &mut Bencher) {
         b.iter(|| approach_two(String::from("hello world")));
     }
-
-    // test length_of_longest_substring::test::bench_approach_two                ... bench:         561 ns/iter (+/- 180)
-    // test length_of_longest_substring::test::bench_length_of_longest_substring ... bench:          96 ns/iter (+/- 26)
 }

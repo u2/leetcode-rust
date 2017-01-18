@@ -36,9 +36,8 @@ pub fn two_sum_approach_two(nums: &[usize], target: usize) -> Option<[usize; 2]>
         return None;
     };
     let mut reviews: HashMap<&usize, usize> = HashMap::with_capacity(len);
-    let mut complement: usize;
     for i in 0..len {
-        complement = target - nums[i];
+        let complement = target - nums[i];
         if reviews.contains_key(&complement) {
             return Some([reviews[&complement], i]);
         } else {
@@ -258,6 +257,7 @@ mod test {
 
     use test::Bencher;
 
+    // 255,709 ns/iter (+/- 25,021)
     #[bench]
     fn bench_two_sum(b: &mut Bencher) {
         b.iter(|| {
@@ -331,6 +331,7 @@ mod test {
         });
     }
 
+    // 71,096 ns/iter (+/- 31,228)
     #[bench]
     fn bench_two_sum_approach_two(b: &mut Bencher) {
         b.iter(|| {
@@ -419,7 +420,4 @@ mod test {
                                  1999)
         });
     }
-
-    // test two_sum::test::bench_two_sum                                         ... bench:     255,709 ns/iter (+/- 25,021)
-    // test two_sum::test::bench_two_sum_approach_two                            ... bench:      71,096 ns/iter (+/- 31,228)
 }

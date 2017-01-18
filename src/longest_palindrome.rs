@@ -5,21 +5,21 @@ use std::cmp;
 
 pub fn longest_palindrome(input: &str) -> &str {
     let length = input.chars().count();
-    let mut sub: &str;
-    let mut char_i: usize;
-    let mut char_j: usize;
-    let mut jth: usize;
+    let s = input.char_indices().collect::<Vec<_>>();
+    let len = input.len();
+
     for i in 0..length {
         for j in 0..i + 1 {
-            char_i = input.char_indices().nth(j).unwrap().0;
-            jth = length - i + j - 1;
+            let char_i = s[j].0;
+            let jth = length - i + j - 1;
+            let char_j: usize;
             if jth == length - 1 {
-                char_j = input.len();
+                char_j = len;
             } else {
-                char_j = input.char_indices().nth(jth + 1).unwrap().0;
+                char_j = s[jth + 1].0;
             }
 
-            sub = &input[char_i..char_j];
+            let sub = &input[char_i..char_j];
             if is_palindrome(sub) {
                 return sub;
             }
@@ -41,10 +41,12 @@ fn is_palindrome(s: &str) -> bool {
 pub fn find_longest_palindrome(input: &str) -> &str {
     let mut start: usize = 0;
     let mut end: usize = 0;
+    let s = input.char_indices().collect::<Vec<_>>();
+    let count = input.chars().count();
 
-    for i in 0..(input.chars().count()) {
-        let (l1, r1) = expand_around_center(input, i, i);
-        let (l2, r2) = expand_around_center(input, i, i + 1);
+    for i in 0..count {
+        let (l1, r1) = expand_around_center(&s, i, i);
+        let (l2, r2) = expand_around_center(&s, i, i + 1);
         let len = cmp::max(r1 - l1, r2 - l2);
         if len > end - start {
             if r1 - l1 > r2 - l2 {
@@ -57,7 +59,7 @@ pub fn find_longest_palindrome(input: &str) -> &str {
         }
     }
 
-    if end == input.chars().count() - 1 {
+    if end == count - 1 {
         return &input[(input.char_indices().nth(start).unwrap().0)..];
     } else {
         return &input[(input.char_indices().nth(start).unwrap().0)..input.char_indices()
@@ -65,18 +67,19 @@ pub fn find_longest_palindrome(input: &str) -> &str {
             .unwrap()
             .0];
     }
-
 }
 
-fn expand_around_center(s: &str, mut left: usize, mut right: usize) -> (usize, usize) {
+fn expand_around_center(ci: &Vec<(usize, char)>,
+                        mut left: usize,
+                        mut right: usize)
+                        -> (usize, usize) {
     let mut changed = false;
     loop {
-        if right == s.chars().count() {
+        if right == ci.len() {
             return (left, right - 1);
         }
-        if left == right ||
-           &s.char_indices().nth(left).unwrap().1 == &s.char_indices().nth(right).unwrap().1 {
-            if left == 0 || right == s.chars().count() - 1 {
+        if left == right || ci[left].1 == ci[right].1 {
+            if left == 0 || right == ci.len() - 1 {
                 break;
             }
             left -= 1;
@@ -135,7 +138,7 @@ mod test {
     }
 
     use test::Bencher;
-    // 70,349,996 ns/iter (+/- 4,699,324)
+    // 35,575,528 ns/iter (+/- 3,888,585)
     #[bench]
     fn bench_longest_palindrome(b: &mut Bencher) {
         b.iter(|| {
@@ -150,7 +153,7 @@ mod test {
         })
     }
 
-    // 70,192,768 ns/iter (+/- 13,232,967)
+    // 36,282,589 ns/iter (+/- 14,288,830)
     #[bench]
     fn bench_find_longest_palindrome(b: &mut Bencher) {
         b.iter(|| {

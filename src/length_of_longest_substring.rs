@@ -100,4 +100,18 @@ mod test {
 
         assert_eq!(approach_two(String::from("")), 0);
     }
+
+    use test::Bencher;
+    #[bench]
+    fn bench_length_of_longest_substring(b: &mut Bencher) {
+        b.iter(|| length_of_longest_substring(String::from("hello world")));
+    }
+
+    #[bench]
+    fn bench_approach_two(b: &mut Bencher) {
+        b.iter(|| approach_two(String::from("hello world")));
+    }
+
+    // test length_of_longest_substring::test::bench_approach_two                ... bench:         561 ns/iter (+/- 180)
+    // test length_of_longest_substring::test::bench_length_of_longest_substring ... bench:          96 ns/iter (+/- 26)
 }

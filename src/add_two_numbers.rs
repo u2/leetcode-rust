@@ -1,8 +1,7 @@
+use std::cmp;
+
 pub fn add_two_numbers(l1: &[usize], l2: &[usize]) -> Vec<usize> {
-    let length: usize = match l1.len() >= l2.len() {
-        true => l1.len(),
-        false => l2.len(),
-    };
+    let length: usize = cmp::max(l1.len(), l2.len());
     let mut vec: Vec<usize> = Vec::with_capacity(length + 1);
     let mut carry: usize = 0;
     for i in 0..length {

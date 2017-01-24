@@ -1,7 +1,9 @@
 // What's zigzag pattern?
 // https://discuss.leetcode.com/topic/22925/if-you-are-confused-with-zigzag-pattern-come-and-see
 pub fn zigzag_conversion(string: &str, num: usize) -> String {
-    if num <= 1 { return string.to_string() };
+    if num <= 1 {
+        return string.to_string();
+    };
     let mut res: Vec<Vec<char>> = Vec::with_capacity(num);
     for _ in 0..num {
         res.push(Vec::with_capacity(string.chars().count() / num + 1))
@@ -16,10 +18,12 @@ pub fn zigzag_conversion(string: &str, num: usize) -> String {
         } else {
             index -= 1;
         }
-        if index % (num - 1) == 0 { increase = !increase; }
+        if index % (num - 1) == 0 {
+            increase = !increase;
+        }
     }
 
-    return res.into_iter().map(|i| i.into_iter().collect::<String>() ).collect::<String>();
+    return res.into_iter().map(|i| i.into_iter().collect::<String>()).collect::<String>();
 }
 
 #[cfg(test)]

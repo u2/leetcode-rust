@@ -97,6 +97,8 @@ fn expand_around_center(ci: &Vec<(usize, char)>,
     return (left, right);
 }
 
+// TODO
+// http://articles.leetcode.com/longest-palindromic-substring-part-ii/
 
 #[cfg(test)]
 mod test {

@@ -8,3 +8,4 @@ pub mod longest_palindrome;
 pub mod zigzag_conversion;
 pub mod reverse_integer;
 pub mod atoi;
+pub mod palindrome_number;

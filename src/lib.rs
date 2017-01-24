@@ -7,3 +7,4 @@ pub mod find_median_sorted_arrays;
 pub mod longest_palindrome;
 pub mod zigzag_conversion;
 pub mod reverse_integer;
+pub mod atoi;
